@@ -13,6 +13,10 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: development
+      NPM_CONFIG_INCLUDE: dev
+      NPM_CONFIG_OMIT: optional
 
     steps:
       - name: Checkout
@@ -23,23 +27,10 @@ jobs:
         with:
           node-version: 20
           cache: npm
-
-      # Fuerza a npm a NO omitir devDependencies (aunque haya .npmrc / env raros)
-      - name: Force devDependencies install
-        run: |
-          npm config set production false
-          npm config delete omit || true
-          npm config set include dev
+          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
-
-      # Diagnóstico rápido: confirma que vite está instalado (y en PATH de npm scripts)
-      - name: Check Vite is available
-        run: |
-          npm ls vite
-          npx vite --version
-          ls -la node_modules/.bin | grep vite
 
       - name: Build
         run: npm run build

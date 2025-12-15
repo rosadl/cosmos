@@ -1,4 +1,5 @@
 import coverImg from "../assets/cover.png";
+import "../styles/cover.css";
 type Props = {
   onStart: () => void;
 };

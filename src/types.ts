@@ -14,6 +14,8 @@ export type StoryNode = {
   text: string;
   teamTurn: Team;
   choices: Choice[];
+  image?: string;
+  audio?: string;
   ending?: boolean;
 };
 

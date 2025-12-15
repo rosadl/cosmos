@@ -3,14 +3,25 @@ import type { Story } from "./types";
 export const story: Story = {
   start: "N0",
   nodes: {
+    
     N0: {
       id: "N0",
-      title: "N0 — Despertar",
-      text: "La nave COSMOS despierta.",
+      title: "Despertar en órbita",
+      text: "La nave COSMOS I se activa tras un largo viaje a través del espacio. Han pasado más de doce años desde que dejó la Tierra, y ahora se encuentra cerca de una estrella lejana, rodeada de varios planetas desconocidos.\n\nLos sensores comienzan a enviar información básica: tamaños, trayectorias y señales procedentes de esos mundos. Uno de los planetas destaca. Su distancia a la estrella sugiere que podría tener condiciones compatibles con agua líquida.\n\nLa misión ha comenzado. Antes de avanzar, el equipo debe decidir cómo explorar este nuevo sistema estelar.",
       teamTurn: "A",
+      image: "/img/N0.png",
+      audio: "/audio/N0.mp3",
       choices: [
-        { label: "Seguir la señal", target: "N1", points: 2 },
-        { label: "Revisar el casco", target: "N2", points: 1 }
+        {
+          label: "Escanear el sistema",
+          target: "N1",
+          points: 2
+        },
+        {
+          label: "Aproximarse al planeta",
+          target: "N2",
+          points: -1
+        }
       ]
     },
 

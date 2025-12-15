@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { TeamNames } from "../types";
-import "./teamSetup.css";
+import "./TeamSetup.css";
 import setupImg from "../assets/setup.png";
 
 type Props = {

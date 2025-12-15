@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { story } from "../story";
 import type { Choice, Team, TeamNames } from "../types";
-import "./gameScreen.css";
+import "./GameScreen.css";
 
 type Props = {
   teamNames: TeamNames;

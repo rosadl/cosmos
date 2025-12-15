@@ -1,66 +1,63 @@
-import { useEffect, useState } from "react";
-import { loadTeamNames, saveTeamNames } from "../storage";
+import { useState } from "react";
+import type { TeamNames } from "../types";
+import "./teamSetup.css";
+import setupImg from "../assets/setup.png"; // ajusta ruta/nombre
 
 type Props = {
-  onDone: () => void; // solo cambia de pantalla
+  onDone: (names: TeamNames) => void;
 };
 
 export default function TeamSetupScreen({ onDone }: Props) {
   const [a, setA] = useState("");
   const [b, setB] = useState("");
 
-  useEffect(() => {
-    const stored = loadTeamNames();
-    setA(stored.A);
-    setB(stored.B);
-  }, []);
-
   const canContinue = a.trim().length > 0 && b.trim().length > 0;
 
   const handleContinue = () => {
-    saveTeamNames({ A: a.trim(), B: b.trim() }); // sobrescribe siempre
-    onDone();
+    onDone({ A: a.trim(), B: b.trim() });
   };
 
   return (
-    <main
-      style={{
-        height: "100vh",
-        width: "100vw",
-        display: "grid",
-        placeItems: "center",
-        padding: 24
-      }}
-    >
-      <div style={{ width: "100%", maxWidth: 520 }}>
-        <h2 style={{ marginTop: 0 }}>Configurar equipos</h2>
+    <main className="teamSetup">
+      <div className="teamSetup-inner">
+        <img src={setupImg} alt="Configuración de equipos" className="teamSetup-image" />
 
-        <label style={{ display: "block", marginBottom: 12 }}>
-          Equipo A
+        <h2 className="teamSetup-title">Configurar equipos</h2>
+
+        <div className="teamSetup-field">
+          <label className="teamSetup-label" htmlFor="teamA">Equipo A</label>
           <input
+            id="teamA"
+            className="teamSetup-input"
             value={a}
             onChange={(e) => setA(e.target.value)}
-            style={{ width: "100%", padding: 10, marginTop: 6 }}
+            placeholder="Nombre del equipo A"
           />
-        </label>
+        </div>
 
-        <label style={{ display: "block", marginBottom: 18 }}>
-          Equipo B
+        <div className="teamSetup-field">
+          <label className="teamSetup-label" htmlFor="teamB">Equipo B</label>
           <input
+            id="teamB"
+            className="teamSetup-input"
             value={b}
             onChange={(e) => setB(e.target.value)}
-            style={{ width: "100%", padding: 10, marginTop: 6 }}
+            placeholder="Nombre del equipo B"
           />
-        </label>
+        </div>
 
-        <button
-          onClick={handleContinue}
-          disabled={!canContinue}
-          style={{ padding: "10px 14px", cursor: canContinue ? "pointer" : "not-allowed" }}
-        >
-          Continuar
-        </button>
+        <p className="teamSetup-intro">
+          Cada decisión que tomes afectará la misión y la puntuación de tu equipo.
+          ¡Emprende un viaje inolvidable a través de las estrellas!
+        </p>
+
+        <div className="teamSetup-actions">
+          <button className="teamSetup-btn" onClick={handleContinue} disabled={!canContinue}>
+            Continuar
+          </button>
+        </div>
       </div>
     </main>
   );
 }
+

@@ -1,0 +1,146 @@
+/* Reset mínimo para asegurar que el layout full-screen funcione */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+/* Estilo base del juego */
+.game {
+  min-height: 100vh;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+
+  background: #05070c;
+  color: rgba(231, 238, 255, 0.92);
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+               "Liberation Mono", "Courier New", monospace;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.game-inner {
+  width: min(900px, 100%);
+}
+
+/* Botón pequeño arriba a la derecha */
+.game-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.game-link {
+  border: none;
+  background: transparent;
+  color: rgba(231, 238, 255, 0.72);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.game-link:hover {
+  color: rgba(120, 170, 255, 0.95);
+}
+
+/* HUD */
+.game-hud {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+
+  border: 1px solid rgba(231, 238, 255, 0.18);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.2);
+
+  margin-bottom: 18px;
+  box-sizing: border-box;
+}
+
+.game-hudBlock {
+  display: grid;
+  gap: 6px;
+}
+
+.game-hudCenter {
+  text-align: center;
+}
+
+.game-hudRight {
+  text-align: right;
+}
+
+.game-hudLabel {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.game-hudValue {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+}
+
+/* Card del nodo */
+.game-card {
+  border: 1px solid rgba(231, 238, 255, 0.18);
+  border-radius: 16px;
+  padding: 22px 20px;
+  background: rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.game-title {
+  margin: 0 0 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-text {
+  margin: 0;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+/* Botones */
+.game-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.game-btn {
+  border: 1px solid rgba(231, 238, 255, 0.22);
+  background: transparent;
+  color: inherit;
+  padding: 12px 18px;
+  border-radius: 12px;
+
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.game-btn:hover {
+  border-color: rgba(120, 170, 255, 0.45);
+}
+
+.game-endingNote {
+  margin-top: 16px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}

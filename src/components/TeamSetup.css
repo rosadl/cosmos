@@ -1,0 +1,97 @@
+.teamSetup {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #05070c;
+  color: rgba(231, 238, 255, 0.92);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+               "Courier New", monospace;
+}
+
+.teamSetup-inner {
+  width: min(520px, 100%);
+  border: 1px solid rgba(231, 238, 255, 0.18);
+  border-radius: 16px;
+  padding: 28px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.teamSetup-title {
+  margin: 0 0 18px;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.9;
+  text-align: center;
+}
+
+.teamSetup-field {
+  margin-bottom: 14px;
+}
+
+.teamSetup-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.teamSetup-input {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(231, 238, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(231, 238, 255, 0.92);
+  outline: none;
+}
+
+.teamSetup-input:focus {
+  border-color: rgba(120, 170, 255, 0.45);
+}
+
+.teamSetup-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.teamSetup-btn {
+  border: 1px solid rgba(231, 238, 255, 0.22);
+  background: transparent;
+  color: inherit;
+  padding: 12px 18px;
+  border-radius: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.teamSetup-btn:hover {
+  border-color: rgba(120, 170, 255, 0.45);
+}
+
+.teamSetup-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.teamSetup-image {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.teamSetup-intro {
+  margin: 18px 0 22px;
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  text-align: center;
+  opacity: 0.85;
+}

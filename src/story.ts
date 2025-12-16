@@ -424,13 +424,99 @@ export const story: Story = {
     ]
   },
 
+  N15: {
+    id: "N15",
+    title: "Superficie",
+    text:
+      "El contacto con el suelo es más suave de lo esperado.\n\n" +
+      "La nave se eßstabiliza lentamente mientras el exterior se impone en los sensores.\n" +
+      "La atmósfera filtra la luz, difusa y constante, sin un origen claro.\n\n" +
+      "Por primera vez desde el inicio de la misión, no hay trayectorias que corregir.\n" +
+      "No hay órbitas que calcular.\n\n" +
+      "Solo un lugar.\n\n" +
+      "El planeta no reacciona.\n" +
+      "No responde.\n" +
+      "Permanece.\n\n" +
+      "La COSMOS I descansa sobre una superficie que nadie ha pisado antes.\n" +
+      "Todo lo que ocurra a partir de ahora dependerá de una última decisión.",
+    teamTurn: "SYSTEM",
+    image: "/img/N15.png",
+    audio: "/audio/N15.mp3",
+    choices: [
+      {
+        label: "Explorar el planeta",
+        target: "N16",
+        points: -10
+      },
+      {
+        label: "Retirarse y observar",
+        target: "N17",
+        points: 10
+      }
+    ]
+  },
+  N16: {
+    id: "N16",
+    title: "Demasiado cerca",
+    text:
+      "La escotilla se abre.\n\n" +
+      "El aire del planeta no es hostil, pero tampoco pasivo.\n" +
+      "Cada respiración se siente distinta, como si el entorno ajustara lentamente las reglas del cuerpo humano.\n\n" +
+      "El terreno responde al contacto.\n" +
+      "No se rompe ni cede: se adapta.\n" +
+      "Las formas del suelo cambian a cada paso, reorganizándose sin prisa.\n\n" +
+      "Las estructuras que emergen del paisaje no parecen construidas,\n" +
+      "pero tampoco completamente naturales.\n" +
+      "Reflejan la luz de formas que confunden la orientación.\n\n" +
+      "Poco a poco, los sistemas de la nave empiezan a fallar.\n" +
+      "Las comunicaciones se vuelven irregulares.\n" +
+      "Los sensores ya no distinguen con claridad entre el interior y el exterior.\n\n" +
+      "No hay violencia.\n" +
+      "No hay rechazo.\n\n" +
+      "El planeta no ataca.\n" +
+      "Simplemente integra.\n\n" +
+      "Cuando intentan regresar, despegar deja de ser una opción clara.\n" +
+      "No porque algo lo impida, sino porque el lugar ya no responde a las mismas reglas.\n\n" +
+      "La misión no termina con una catástrofe.\n" +
+      "Termina con una permanencia inesperada.\n\n" +
+      "Algunos lugares no se conquistan.\n" +
+      "Y no todos permiten volver una vez cruzado su umbral.",
+    teamTurn: "SYSTEM",
+    ending: true,
+    image: "/img/N16.png",
+    audio: "/audio/N6.mp3",
+    choices: []
+  },
 
-
-
-
-
-
-    N20: { id: "N4", title: "Final 1", text: "Final.", teamTurn: "SYSTEM", ending: true, choices: [] },
-    N21: { id: "N5", title: "Final 2", text: "Final.", teamTurn: "SYSTEM", ending: true, choices: [] }
+  N17: {
+    id: "N17",
+    title: "La distancia justa",
+    text:
+      "La escotilla permanece cerrada.\n\n" +
+      "Desde el interior de la nave, el planeta se revela lentamente.\n" +
+      "La superficie refleja la luz en patrones cambiantes que nunca se repiten del todo.\n\n" +
+      "Las formaciones del terreno se transforman de manera continua.\n" +
+      "No es movimiento brusco, sino una reorganización constante.\n\n" +
+      "Los instrumentos de la COSMOS I comienzan a registrar datos coherentes\n" +
+      "cuando se observan en conjunto.\n" +
+      "Ciclos, relaciones y ritmos emergen solo a cierta distancia.\n\n" +
+      "Durante días —quizá semanas— la tripulación observa.\n" +
+      "Tormentas se forman y se disuelven.\n" +
+      "Zonas enteras del paisaje cambian sin perder continuidad.\n\n" +
+      "No hay señales claras de comunicación.\n" +
+      "Pero tampoco rechazo.\n\n" +
+      "El planeta existe plenamente sin necesidad de ser pisado.\n\n" +
+      "Cuando llega el momento de partir, la nave conserva sus sistemas intactos.\n" +
+      "Los datos recopilados no explican el planeta por completo,\n" +
+      "pero revelan algo esencial:\n\n" +
+      "no todos los mundos se comprenden desde dentro.\n\n" +
+      "Algunos solo se muestran cuando se los respeta lo suficiente\n" +
+      "como para mantener la distancia.",
+    teamTurn: "SYSTEM",
+    image: "/img/N17.png",
+    audio: "/audio/N17.mp3",
+    ending: true,
+    choices: []
+  }
   }
 };

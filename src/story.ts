@@ -79,7 +79,7 @@ export const story: Story = {
         {
           label: "Ajustar trayectoria",
           target: "N6",
-          points: -5
+          points: -10
         }
       ]
     },
@@ -154,6 +154,77 @@ export const story: Story = {
       ]
     },
 
+
+    N5: {
+      id: "N5",
+      title: "Dentro de la tormenta",
+      text:
+        "La nave atraviesa las capas superiores sin detener la maniobra.\n" +
+        "Las corrientes golpean con fuerza, pero los sistemas resisten.\n\n" +
+        "Durante unos instantes, todo es ruido y sacudidas.\n" +
+        "Después, el caos se abre.\n\n" +
+        "Ante la cabina aparece una región inesperadamente calma, suspendida en medio de la tormenta.\n" +
+        "Bandas de nubes se curvan alrededor de un vacío luminoso, como si algo hubiera despejado el camino justo a tiempo.\n\n" +
+        "La luz no es uniforme.\n" +
+        "Se mueve con suavidad, marcando una dirección clara entre las corrientes.\n\n" +
+        "La COSMOS I entra en ese espacio sin realizar correcciones evidentes.\n" +
+        "Las manos siguen los controles, pero nadie recuerda haber ordenado ese giro exacto.\n\n" +
+        "No lo buscaron.\n" +
+        "No lo planearon.\n\n" +
+        "Y, aun así, la nave avanza como si estuviera siendo llevada.\n\n" +
+        "Durante esos segundos, la tormenta deja de ser violencia y se convierte en estructura.\n" +
+        "Un orden oculto, bello y frágil, que parece responder a una intención.\n\n" +
+        "Ahora, esa luz se adelanta.\n" +
+        "Marca un camino más profundo hacia el planeta.\n\n" +
+        "La pregunta ya no es qué están viendo.\n" +
+        "Es si están dispuestos a seguirlo.",
+      teamTurn: "A",
+      image: "/img/N5.png",
+      audio: "/audio/N5.mp3",
+      choices: [
+        {
+          label: "Seguir la luz",
+          target: "N11",
+          points: 2
+        },
+        {
+          label: "Resistir control",
+          target: "N12",
+          points: -2
+        }
+      ]
+    },
+
+    N6: {
+      id: "N6",
+      title: "Lo que no ocurrió",
+      text:
+        "La COSMOS I permanece en órbita durante semanas.\n\n" +
+        "Desde la distancia, el planeta continúa girando con regularidad.\n" +
+        "Las tormentas aparecen y desaparecen.\n" +
+        "Los patrones se repiten.\n\n" +
+        "Los datos recopilados son incompletos.\n" +
+        "Insuficientes para comprender la dinámica real del planeta.\n" +
+        "Demasiado superficiales para justificar una continuación de la misión.\n\n" +
+        "El tiempo pasa, y los márgenes se reducen.\n" +
+        "Las maniobras repetidas, las correcciones constantes y la espera prolongada consumen más combustible del previsto.\n\n" +
+        "Cuando los cálculos se actualizan, la conclusión es clara.\n" +
+        "No queda margen para intentar una nueva aproximación sin comprometer el regreso.\n\n" +
+        "La misión no fracasa por un error técnico.\n" +
+        "Fracasa por no haber ido lo suficientemente lejos.\n\n" +
+        "La decisión final ya no es científica ni estratégica.\n" +
+        "Es física.\n\n" +
+        "La nave inicia el viaje de vuelta mientras aún puede hacerlo.\n" +
+        "El planeta queda atrás, silencioso e intacto.\n\n" +
+        "Nunca sabrán qué había más allá de aquel límite.\n" +
+        "Ni si la decisión inicial fue prudencia… o miedo.\n\n" +
+        "Solo queda el registro de una oportunidad perdida.",
+      teamTurn: "SYSTEM",
+      image: "/img/N6.png",
+      audio: "/audio/N6.mp3",
+      ending: true,
+      choices: []
+    },
 
     N7: {
       id: "N7",
@@ -274,6 +345,86 @@ export const story: Story = {
       }
     ]
   },
+
+  N11: {
+    id: "N11",
+    title: "Horizonte",
+    text:
+      "La luz ocupa ahora toda la cabina.\n" +
+      "No ilumina: deforma.\n\n" +
+      "Las estrellas del fondo se curvan hacia un punto central, estiradas como si el espacio estuviera siendo comprimido.\n" +
+      "Los instrumentos dejan de mostrar coordenadas coherentes.\n\n" +
+      "Uno de los tripulantes lo dice en voz baja, casi como una conclusión inevitable:\n" +
+      "no es una fuente de energía, es una anomalía gravitatoria extrema.\n\n" +
+      "Algo similar a un agujero negro.\n" +
+      "Pero incompleto. Inestable.\n\n" +
+      "La luz no procede de lo que emite, sino de lo que engulle.\n" +
+      "Materia, radiación, incluso información parecen desaparecer en su interior.\n\n" +
+      "Entonces ocurre lo inesperado.\n\n" +
+      "La gravedad no aumenta.\n" +
+      "No hay colapso.\n\n" +
+      "En lugar de eso, el espacio frente a la nave se abre.\n" +
+      "Dos regiones distantes del universo quedan conectadas por un túnel imposible: un agujero de gusano.\n\n" +
+      "La COSMOS I es arrastrada hacia él sin aceleración, sin impacto.\n" +
+      "Durante un instante sin tiempo, no hay distancia que recorrer.\n\n" +
+      "Y luego, el túnel se cierra.\n\n" +
+      "La nave emerge intacta, suspendida a baja altura sobre la superficie del planeta.\n" +
+      "No ha habido descenso.\n" +
+      "No ha habido travesía atmosférica.\n\n" +
+      "Han llegado.\n\n" +
+      "La luz ha desaparecido.\n" +
+      "Pero la certeza permanece:\n\n" +
+      "algo les ha traído aquí.",
+    teamTurn: "A",
+    image: "/img/N11.png",
+    audio: "/audio/N11.mp3",
+    choices: [
+      {
+        label: "Descender",
+        target: "N15",
+        points: 0
+      }
+    ]
+  },
+
+  N12: {
+    id: "N12",
+    title: "Fricción",
+    text:
+      "La nave se aleja de la luz con una corrección brusca.\n" +
+      "El resplandor queda atrás, distorsionado por las corrientes atmosféricas.\n\n" +
+      "Durante unos segundos, parece que la maniobra ha funcionado.\n" +
+      "Luego, el equilibrio se rompe.\n\n" +
+      "La COSMOS I entra de lleno en una región de turbulencias extremas.\n" +
+      "Las capas superiores del planeta se cierran alrededor de la nave como un sistema en movimiento constante.\n\n" +
+      "Las alarmas se activan casi al instante.\n" +
+      "Sistemas secundarios se desconectan para evitar daños mayores.\n\n" +
+      "Un impacto sacude el casco.\n" +
+      "No es grave, pero deja huella.\n\n" +
+      "En la cabina, el silencio dura poco.\n" +
+      "La tensión se hace evidente.\n\n" +
+      "No todos estaban de acuerdo con alejarse de la luz.\n" +
+      "Algunos creen que han evitado algo peligroso.\n" +
+      "Otros están convencidos de que han rechazado la única salida limpia.\n\n" +
+      "Las discusiones se superponen a las alertas.\n" +
+      "Por primera vez desde el inicio de la misión, el problema no está fuera de la nave.\n\n" +
+      "Tras un descenso forzado, la COSMOS I logra estabilizarse.\n" +
+      "Han llegado al planeta.\n\n" +
+      "Pero lo hacen con daños visibles…\n" +
+      "y con una grieta que no es solo estructural.",
+    teamTurn: "A",
+    image: "/img/N12.png",
+    audio: "/audio/N12.mp3",
+    choices: [
+      {
+        label: "Continuar",
+        target: "N15",
+        points: 0
+      }
+    ]
+  },
+
+
 
 
 

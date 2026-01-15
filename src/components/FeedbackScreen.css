@@ -1,0 +1,90 @@
+.feedback {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #05070c;
+  color: rgba(231, 238, 255, 0.92);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.feedback-inner {
+  --width: min(900px, 100%);
+  border: 1px solid rgba(231, 238, 255, 0.18);
+  border-radius: 16px;
+  padding: 22px;
+  background: rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.feedback-teamRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+.feedback-team {
+  font-weight: 600;
+}
+
+.feedback-total {
+  opacity: 0.8;
+}
+
+.feedback-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  margin: 10px 0 12px;
+  display: block;
+}
+
+.feedback-title {
+  margin: 6px 0 6px;
+}
+
+.feedback-sub {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.feedback-delta {
+  margin: 0 0 16px;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+}
+
+.feedback-title.pos,
+.feedback-sub.pos,
+.feedback-delta.pos {
+  color: rgba(77, 227, 193, 0.95);
+}
+
+.feedback-title.neg,
+.feedback-sub.neg,
+.feedback-delta.neg {
+  color: rgba(255, 107, 107, 0.95);
+}
+
+.feedback-btn {
+  border: 1px solid rgba(231, 238, 255, 0.22);
+  background: transparent;
+  color: inherit;
+  padding: 12px 18px;
+  border-radius: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.feedback-btn:hover {
+  border-color: rgba(120, 170, 255, 0.45);
+}

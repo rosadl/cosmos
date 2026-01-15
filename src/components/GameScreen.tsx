@@ -1,7 +1,11 @@
+// src/components/GameScreen.tsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import { story } from "../story";
 import type { Choice, Team, TeamNames } from "../types";
 import "./GameScreen.css";
+
+import FeedbackScreen from "./FeedbackScreen";
+import negativeFeedbackImg from "../assets/feedbackNegative.png";
 
 type Props = {
   teamNames: TeamNames;
@@ -26,18 +30,31 @@ function resolveAssetUrl(path?: string) {
       ? (import.meta as any).env.BASE_URL
       : "/";
 
-  // path tipo "/audio/N0.mp3" -> base + "audio/N0.mp3"
   if (path.startsWith("/")) return `${base}${path.slice(1)}`;
-  // path tipo "audio/N0.mp3" -> base + "audio/N0.mp3"
   return `${base}${path}`;
 }
+
+type FeedbackState = null | {
+  type: "positive" | "negative";
+  teamKey: "A" | "B";
+  teamName: string;
+  deltaPoints: number;
+  teamTotalPoints: number;
+  nextNodeId: string;
+  imageUrl?: string;
+};
 
 export default function GameScreen({ teamNames, onRestartMission }: Props) {
   const [nodeId, setNodeId] = useState<string>(story.start);
   const [score, setScore] = useState<Score>({ A: 0, B: 0 });
 
-  // Para cumplir política de autoplay: solo intentamos reproducir tras interacción.
-  const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  // Feedback intermedio (positivo/negativo)
+  const [feedback, setFeedback] = useState<FeedbackState>(null);
+
+  // Audio:
+  // - audioEnabled: el usuario ha elegido "audio ON" y debe persistir entre nodos
+  // - isAudioPlaying: estado visual del botón
+  const [audioEnabled, setAudioEnabled] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -45,22 +62,64 @@ export default function GameScreen({ teamNames, onRestartMission }: Props) {
   const node = useMemo(() => story.nodes[nodeId], [nodeId]);
 
   const applyChoice = (choice: Choice) => {
-    setHasUserInteracted(true);
-
-    if (node && isPlayableTeam(node.teamTurn)) {
-      setScore((s) => ({ ...s, [node.teamTurn]: s[node.teamTurn] + choice.points }));
+    // Si es 0 puntos (transición / convergencia), NO mostramos feedback
+    if (choice.points === 0) {
+      setNodeId(choice.target);
+      return;
     }
-    setNodeId(choice.target);
+
+    // Si el nodo actual no es de equipo (SYSTEM), avanzamos sin feedback
+    if (!node || !isPlayableTeam(node.teamTurn)) {
+      setNodeId(choice.target);
+      return;
+    }
+
+    const teamKey = node.teamTurn; // "A" | "B"
+    const teamName = teamKey === "A" ? teamNames.A : teamNames.B;
+
+    // Total nuevo (para mostrar en feedback)
+    const newTotal = score[teamKey] + choice.points;
+
+    // Sumamos puntos al equipo que decide
+    setScore((s) => ({ ...s, [teamKey]: s[teamKey] + choice.points }));
+
+    // Imagen feedback:
+    // + => imagen del nodo siguiente
+    // - => imagen fija importada (NO pasar por resolveAssetUrl)
+    const nextNode = story.nodes[choice.target];
+    const nextImageUrl = resolveAssetUrl(nextNode?.image);
+
+    const imageUrl = choice.points > 0 ? nextImageUrl : negativeFeedbackImg;
+
+    // Pausar audio del nodo durante feedback (silencio en feedback)
+    const el = audioRef.current;
+    if (el) {
+      el.pause();
+      setIsAudioPlaying(false);
+    }
+
+    setFeedback({
+      type: choice.points > 0 ? "positive" : "negative",
+      teamKey,
+      teamName,
+      deltaPoints: choice.points,
+      teamTotalPoints: newTotal,
+      nextNodeId: choice.target,
+      imageUrl
+    });
   };
 
-  // Cargar y (si ya hubo interacción) intentar reproducir el audio del nodo
+  // Cargar el audio del nodo y reproducirlo SOLO si el usuario lo activó (audioEnabled).
+  // Si audioEnabled es false, se queda pausado aunque cambie de nodo.
   useEffect(() => {
+    // Si estamos mostrando feedback, no tocamos audio del nodo
+    if (feedback) return;
+
     const el = audioRef.current;
     if (!el) return;
 
     const url = resolveAssetUrl(node?.audio);
     if (!url) {
-      // Si no hay audio para este nodo, paramos
       el.pause();
       el.removeAttribute("src");
       el.load();
@@ -68,22 +127,19 @@ export default function GameScreen({ teamNames, onRestartMission }: Props) {
       return;
     }
 
-    // Cambia la fuente del audio
+    // Cambia la fuente
     el.pause();
     el.src = url;
     el.load();
     setIsAudioPlaying(false);
 
-    // Autoplay solo tras interacción
-    if (hasUserInteracted) {
+    // Persistencia: si el usuario activó audio, intentamos reproducir en cada nodo
+    if (audioEnabled) {
       el.play()
         .then(() => setIsAudioPlaying(true))
-        .catch(() => {
-          // Si el navegador bloquea o falla, no hacemos nada: el usuario puede dar Play manual
-          setIsAudioPlaying(false);
-        });
+        .catch(() => setIsAudioPlaying(false));
     }
-  }, [nodeId, node?.audio, hasUserInteracted]);
+  }, [nodeId, node?.audio, feedback, audioEnabled]);
 
   const toggleAudio = async () => {
     const el = audioRef.current;
@@ -93,16 +149,18 @@ export default function GameScreen({ teamNames, onRestartMission }: Props) {
     if (!node?.audio) return;
 
     try {
-      setHasUserInteracted(true);
       if (el.paused) {
         await el.play();
         setIsAudioPlaying(true);
+        setAudioEnabled(true); // a partir de ahora, audio persistente entre nodos
       } else {
         el.pause();
         setIsAudioPlaying(false);
+        setAudioEnabled(false); // el usuario quiere silencio
       }
     } catch {
       setIsAudioPlaying(false);
+      // Si falla play, no activamos audioEnabled
     }
   };
 
@@ -132,11 +190,12 @@ export default function GameScreen({ teamNames, onRestartMission }: Props) {
       ? `Turno: ${teamNames.B}`
       : "Turno: Sistema";
 
-  const imageUrl = resolveAssetUrl(node.image);
+  const nodeImageUrl = resolveAssetUrl(node.image);
 
   return (
     <main className="game">
       <div className="game-inner">
+        {/* TOPBAR SIEMPRE VISIBLE */}
         <div className="game-topbar">
           <button className="game-link" onClick={onRestartMission}>
             Reiniciar misión
@@ -153,6 +212,7 @@ export default function GameScreen({ teamNames, onRestartMission }: Props) {
         {/* elemento audio (sin controles visibles) */}
         <audio ref={audioRef} preload="auto" />
 
+        {/* HUD SIEMPRE VISIBLE */}
         <div className="game-hud">
           <div className="game-hudBlock">
             <div className="game-hudLabel">Equipo A</div>
@@ -174,34 +234,49 @@ export default function GameScreen({ teamNames, onRestartMission }: Props) {
           </div>
         </div>
 
-        <div className="game-card">
-          {/* Imagen del nodo (PNG transparente) */}
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt={node.title}
-              className="game-nodeImage"
-              draggable={false}
-            />
-          )}
+        {/* CONTENIDO CENTRAL: feedback o nodo */}
+        {feedback ? (
+          <FeedbackScreen
+            teamName={feedback.teamName}
+            teamTotalPoints={feedback.teamTotalPoints}
+            deltaPoints={feedback.deltaPoints}
+            type={feedback.type}
+            imageUrl={feedback.imageUrl}
+            onContinue={() => {
+              setNodeId(feedback.nextNodeId);
+              setFeedback(null);
+            }}
+          />
+        ) : (
+          <div className="game-card">
+            {/* Imagen del nodo (PNG transparente) */}
+            {nodeImageUrl && (
+              <img
+                src={nodeImageUrl}
+                alt={node.title}
+                className="game-nodeImage"
+                draggable={false}
+              />
+            )}
 
-          <h2 className="game-title">{node.title}</h2>
-          <p className="game-text">{node.text}</p>
+            <h2 className="game-title">{node.title}</h2>
+            <p className="game-text">{node.text}</p>
 
-          <div className="game-actions">
-            {node.choices.map((c, idx) => (
-              <button key={idx} className="game-btn" onClick={() => applyChoice(c)}>
-                {c.label}
-              </button>
-            ))}
+            <div className="game-actions">
+              {node.choices.map((c, idx) => (
+                <button key={idx} className="game-btn" onClick={() => applyChoice(c)}>
+                  {c.label}
+                </button>
+              ))}
+            </div>
+
+            {node.ending && (
+              <p className="game-endingNote">
+                Fin de la misión. Usa “Reiniciar misión” para comenzar de nuevo.
+              </p>
+            )}
           </div>
-
-          {node.ending && (
-            <p className="game-endingNote">
-              Fin de la misión. Usa “Reiniciar misión” para comenzar de nuevo.
-            </p>
-          )}
-        </div>
+        )}
       </div>
     </main>
   );

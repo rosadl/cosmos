@@ -2,16 +2,29 @@ import { useState } from "react";
 import TitleScreen from "./components/TitleScreen";
 import TeamSetupScreen from "./components/TeamSetupScreen";
 import GameScreen from "./components/GameScreen";
+import HowToScreen from "./components/HowToScreen";
 import type { TeamNames } from "./types";
 
-type Mode = "title" | "setup" | "game";
+type Mode = "title" | "howto" | "setup" | "game";
 
 export default function App() {
   const [mode, setMode] = useState<Mode>("title");
-  const [teamNames, setTeamNames] = useState<TeamNames>({ A: "Equipo A", B: "Equipo B" });
+  const [teamNames, setTeamNames] = useState<TeamNames>({
+    A: "Equipo A",
+    B: "Equipo B"
+  });
 
   if (mode === "title") {
-    return <TitleScreen onStart={() => setMode("setup")} />;
+    return (
+      <TitleScreen
+        onStart={() => setMode("setup")}
+        onHowTo={() => setMode("howto")}
+      />
+    );
+  }
+
+  if (mode === "howto") {
+    return <HowToScreen onBack={() => setMode("title")} />;
   }
 
   if (mode === "setup") {
@@ -30,12 +43,13 @@ export default function App() {
       teamNames={teamNames}
       onRestartMission={() => {
         setMode("title");
-        // opcional: si quieres forzar que se reescriban siempre al empezar:
+        // opcional:
         // setTeamNames({ A: "Equipo A", B: "Equipo B" });
       }}
     />
   );
 }
+
 
 
 

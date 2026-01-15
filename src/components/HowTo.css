@@ -1,0 +1,76 @@
+.howto {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #05070c;
+  color: rgba(231, 238, 255, 0.92);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+               "Courier New", monospace;
+}
+
+.howto-inner {
+  width: min(720px, 100%);
+  border: 1px solid rgba(231, 238, 255, 0.18);
+  border-radius: 16px;
+  padding: 28px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.howto-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 18px;
+}
+
+.howto-title {
+  margin: 0 0 14px;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.howto-text {
+  font-size: 13px;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.howto-list {
+  margin: 12px 0 12px;
+  padding-left: 18px;
+}
+
+.howto-list li {
+  margin: 8px 0;
+}
+
+.howto-note {
+  margin-top: 12px;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.howto-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.howto-btn {
+  border: 1px solid rgba(231, 238, 255, 0.22);
+  background: transparent;
+  color: inherit;
+  padding: 12px 18px;
+  border-radius: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.howto-btn:hover {
+  border-color: rgba(120, 170, 255, 0.45);
+}

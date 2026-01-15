@@ -334,7 +334,7 @@ export const story: Story = {
       "Cuando por fin se decide bajar, la nave sigue intacta.\n" +
       "Pero la misión ya no es la misma.\n" +
       "Han llegado tarde… y con menos margen del que esperaban.",
-    teamTurn: "B",
+    teamTurn: "A",
     image: "/img/N10.png",
     audio: "/audio/N10.mp3",
     choices: [
@@ -439,7 +439,7 @@ export const story: Story = {
       "Permanece.\n\n" +
       "La COSMOS I descansa sobre una superficie que nadie ha pisado antes.\n" +
       "Todo lo que ocurra a partir de ahora dependerá de una última decisión.",
-    teamTurn: "SYSTEM",
+    teamTurn: "B",
     image: "/img/N15.png",
     audio: "/audio/N15.mp3",
     choices: [

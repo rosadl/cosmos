@@ -1,4 +1,4 @@
-import "./howTo.css";
+import "./HowTo.css";
 import howToImg from "../assets/howto.png";
 
 type Props = {

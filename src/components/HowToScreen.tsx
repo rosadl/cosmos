@@ -1,5 +1,5 @@
 import "./HowTo.css";
-import howToImg from "../assets/howto.png";
+import howToImg from "../assets/Howto.png";
 
 type Props = {
   onBack: () => void;
